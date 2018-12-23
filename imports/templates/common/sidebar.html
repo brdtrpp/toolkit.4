@@ -30,19 +30,16 @@
                         <span>{{_"sidebar.heading.HEADER"}}</span>
                     </li>
                     <li class="{{isActiveRoute regex='dashboard'}}">
-                        <a href="{{pathFor 'dashboard'}}" title="Dashboard!">
-                            <em class="far fa-file"></em>
+                        <a href="{{pathFor 'dashboard'}}" title="Dashboard">
+                            <em class="fas fa-tachometer-alt"></em>
                             <span>{{_ "sidebar.nav.DASHBOARD" }}</span>
                         </a>
                     </li>
                     <li class="{{isActiveRoute regex='processes'}}">
                         <a href="{{pathFor 'processes'}}" title="Processes">
-                            <em class="far fa-file"></em>
+                            <em class="fas fa-project-diagram"></em>
                             <span>{{_ "sidebar.nav.PROCESSES" }}</span>
                         </a>
-                        <ul id="elements" class="sidebar-nav sidebar-subnav">
-                            <li class="sidebar-subnav-header">Elements</li>
-                        </ul>
                     </li>
                 </ul>
                 <!-- END sidebar nav-->

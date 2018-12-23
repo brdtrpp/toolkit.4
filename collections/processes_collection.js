@@ -1,8 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
 Processes = new Mongo.Collection("processes");
-import { Random } from 'meteor/random'
-
+import { Random } from 'meteor/random';
 
 if (Meteor.isServer) {
  Meteor.publish('processes', function() {
@@ -18,25 +17,62 @@ ProcessSchema = new SimpleSchema({
   //     omit: true,
   //   }
   // },
+  createdAt: {
+    type: Date,
+    autoform: {
+      omit: true,
+    },
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date();
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date()};
+      } else {
+        this.unset();  // Prevent user from supplying their own value
+      }
+    }
+  },
+
+  updatedAt: {
+    type: Date,
+    autoValue: function() {
+      if (this.isUpdate) {
+        return new Date();
+      }
+    },
+    autoform: {
+      omit: true,
+    },
+    denyInsert: true,
+    optional: true
+  },
 
   name: {
     type: String,
     label: "What is the name of the process under review?",
+    index: true,
+    unique: true,
     max: 75
   },
 
   description: {
     type: String,
-    label: "A short description of the process",
+    label: "A short description of the process.",
     max: 400,
     autoform: {
       rows: 3
     }
   },
 
+
+  // Application Schema
   app: {
     type: Array,
     label: "What applications are in this Process?",
+    optional: true,
+    autoform: {
+      omit: true,
+    }
   },
 
   "app.$":{
@@ -44,9 +80,109 @@ ProcessSchema = new SimpleSchema({
     type: Object
   },
 
-  "app.$.name": {
+  // "app.$.createdAt": {
+  //   type: Date,
+  //   autoform: {
+  //     omit: true,
+  //   },
+  //   autoValue: function() {
+  //     if (this.isInsert) {
+  //       return new Date();
+  //     } else if (this.isUpsert) {
+  //       return {$setOnInsert: new Date()};
+  //     } else {
+  //       this.unset();  // Prevent user from supplying their own value
+  //     }
+  //   }
+  // },
+  //
+  // "app.$.updatedAt": {
+  //   type: Date,
+  //   autoValue: function() {
+  //     if (this.isUpdate) {
+  //       return new Date();
+  //     }
+  //   },
+  //   autoform: {
+  //     omit: true,
+  //   },
+  //   denyInsert: true,
+  //   optional: true
+  // },
+
+  "app.$.appName": {
     type: String,
+    label: "What is the name of the Application you are adding to this Process?",
+    custom(){
+        let pro = Processes.findOne({_id: this.docId});
+        if (pro.app == undefined) {
+          app = undefined;
+        } else {
+          app = pro.app.find(o => o.appName === this.value);
+        }
+        if (app != undefined) {
+          return SimpleSchema.ErrorTypes.REQUIRED;
+        } else {
+          return undefined;
+        }
+    }
   },
+
+  // Scenario Schema
+
+  "app.$.scenarios": {
+    type: Array,
+    label: "What applications are in this Process?",
+    optional: true,
+    autoform: {
+      omit: true,
+    }
+  },
+
+  "app.$.scenarios.$": {
+    type: Object
+  },
+
+  "app.$.scenarios.$.sceName": {
+    type: String,
+    label: "What is this name of scenario?"
+  },
+  "app.$.scenarios.$.sceDescription": {
+    type: String,
+    label: "A short description of the scenario.",
+    max: 400,
+    autoform: {
+      rows: 3
+    }
+  },
+
+  "app.$.scenarios.$.sceState": {
+    type: String,
+    // allowedValues: ["current", "future"],
+  },
+
+  //  Scenario Rollup
+  // rollup: {
+  //   type: Number,
+  //   autoform: {
+  //     omit: true,
+  //   },
+  //   autoValue: function(){
+  //     var sumArray = [];
+  //     var sces = Activities.find({scenario: this.docId}).fetch();
+  //     _.forEach(sces, function(sce){
+  //       sumArray.push(sce.rollup);
+  //     });
+  //     function getSum(total, num){
+  //       return total + num;
+  //     }
+  //     if (sumArray == 0) {
+  //       return 0;
+  //     } else {
+  //       return sumArray.reduce(getSum);
+  //     }
+  //   }
+  // }
 
   timeperiod: {
     type: Object,
@@ -66,11 +202,8 @@ ProcessSchema = new SimpleSchema({
       }
     }
   },
+
   "timeperiod.time": Number,
-  // drivers: {
-  //   type: Array,
-  //   label: "What are some drivers?"
-  // },
 
   downtime: {
     type: Number,

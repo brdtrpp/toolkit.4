@@ -15,20 +15,25 @@ Template.processes.onRendered = function() {
 // Adding events per template
 Template.processes.events({
     'click .addProcess': function(event, template) {
-      var process = Session.get('processes');
-      if (process){
+      var viewing = Session.get('processes');
+      if (viewing){
         Session.set('processes', false);
       } else {
         Session.set('processes', true);
       }
     },
+
+    'click .goPro': function(event, template) {
+      // console.log('/process/'+this._id);
+      Router.go('/process/'+this._id);
+    }
 });
 
 
 Template.processes.helpers({
   viewing(){
-    var process = Session.get('processes');
-    return process;
+    var viewing = Session.get('processes');
+    return !viewing;
   },
 
   process(){

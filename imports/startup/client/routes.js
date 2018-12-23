@@ -2,9 +2,7 @@
 //Router configurations
 Router.configure({
   layoutTemplate: 'layout',
-  subscriptions: function() {
-    // returning a subscription handle or an array of subscription handles
-    // adds them to the wait list.
+  waitOn: function() {
     return Meteor.subscribe('processes');
   },
 });
@@ -23,12 +21,19 @@ Router.route('/processes', function () {
 });
 
 Router.route('/process/:id', function() {
+  // find process based on id, if no process is found with id then
+  // reroute to dashboard. ~BWT
   var id = this.params.id;
-  this.render('process', {
-    data: function () {
-      return Processes.findOne({_id: id});
+  var process = Processes.findOne({_id: id});
+  if (process === undefined) {
+    this.redirect('/processes')
+  } else {
+    this.render('process', {
+      data: function () {
+        return process;
+      }
     }
-  });
+  )};
 },{
   name: "process",
 });

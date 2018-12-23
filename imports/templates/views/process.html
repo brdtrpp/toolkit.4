@@ -1,17 +1,47 @@
 <template name="process">
     <div class="content-heading">
-       <div>Process - {{name}}</div>
+       <div>Process - {{name}} <small>Period Under Review: {{timeperiod.duration}} {{timeperiod.type}}</small></div>
     </div>
     <div class="row">
         {{#each app}}
-         {{name}}
+          <div class="btn-group app">
+           <button type="button" class="btn btn-{{active}} app">{{appName}}</button>
+           <button type="button" class="btn btn-{{active}} app" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <i class="app fas fa-ellipsis-v" aria-hidden="true"></i>
+           </button>
+           <ul class="dropdown-menu app">
+             <li><a href="#" class="app clone-application"><span class="fas fa-redo-alt"></span> Clone Application</a></li>
+             <li><a href="#" class="app template-application"><span class="glyphicon glyphicon-file"></span> Templatize Application</a></li>
+             <li><a href="#" class="app edit-application" data-toggle="modal" data-target="#appModal"><span class="glyphicon glyphicon-pencil"></span> Edit Application</a></li>
+             <li><a href="#" class="app delete-application"><span class="glyphicon glyphicon-trash"></span> Delete Application</a></li>
+           </ul>
+          </div>
         {{/each}}
+        <button type="button" class="btn btn-warning app" data-toggle="collapse" href="#addAppForm" role="button" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Application</button>
+    </div>
+    <div class="collapse" id="addAppForm">
+      <div class="card card-body">
+        {{>quickForm collection="Processes" id="insertApp" doc=this type="update-pushArray" scope="app"}}
+      </div>
     </div>
 
-      {{>quickForm collection="Processes" id="insertApp" doc=this type="update-pushArray" scope="app"}}
-      <!-- {{#autoForm collection="Processes" id="insertApp" doc=this type="update-pushArray" scope="app"}}
-        {{> afQuickField name='name'}}
-        <button type="submit" class="btn btn-primary">Insert</button>
-      {{/autoform}} -->
+    {{#each scenario}}
+    <div class="card mb-3 border-success">
+       <div class="card-header text-white bg-success">Header</div>
+       <div class="card-body">
+          <h5 class="card-title">Success card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+       </div>
+    </div>
+    {{/each}}
+    <div class="card card-default mb-3">
+       <div class="card-header addSce" style="cursor: pointer;">Add A Scenario</div>
+       <div class="card-body collapse" id="addSce">
+           <p class="card-text">
+             {{>quickForm collection="Processes" id="insertSce" doc=this type="update-pushArray" scope="app.0.scenarios"}}
+           </p>
+       </div>
+    </div>
+
 
 </template>

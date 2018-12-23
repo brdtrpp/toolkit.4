@@ -36,3 +36,6 @@ aldeed:autoform
 aldeed:collection2
 iron:router
 meteortesting:mocha
+aldeed:schema-index
+aldeed:schema-deny
+themeteorchef:bert
