@@ -12,12 +12,14 @@ Template.process.onRendered = function() {
 Template.process.events({
   'click .app': function(){
     Session.set('appId', this.appName);
-    },
+    $('#addSce').collapse('hide');
+    $('#addAppForm').collapse('hide');
+  },
 
-    'click .addSce': function(){
-      $('#addSce').collapse('toggle');
-      $('#addSce2').collapse('toggle');
-    },
+  'click .addSce': function(){
+    $('#addSce').collapse('toggle');
+    $('#addAppForm').collapse('hide');
+  },
     // 'click .clone-application': function(){
     //   var app = Session.get('app');
     //   var pro = Session.get('process');
@@ -40,7 +42,7 @@ Template.process.helpers({
 
   active(){
     if (Session.equals("appId", this.appName)){
-      return "primary"
+      return "primary";
     } else {
       return "default";
     }

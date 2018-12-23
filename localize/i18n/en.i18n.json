@@ -15,10 +15,7 @@
     "nav": {
       "DASHBOARD": "Dashboard",
       "PROCESSES": "Processes",
-      "menu": {
-        "MENU": "Menu",
-        "SUBMENU": "Sub Menu"
-      }
+      "TEMPLATES": "Templates"
     }
   }
 }
