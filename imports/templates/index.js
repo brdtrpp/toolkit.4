@@ -14,10 +14,12 @@ import './common/topnavbar.js';
 // DASHBOARD
 import './views/dashboard.html';
 import './views/dashboard.js';
-import './views/submenu.html';
 // Processes
 import './views/processes.html';
 import './views/processes.js';
 // Process
 import './views/process.html';
 import './views/process.js';
+// Activities
+import './views/activity.html';
+import './views/activity.js';

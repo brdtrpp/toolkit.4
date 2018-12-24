@@ -80,36 +80,6 @@ ProcessSchema = new SimpleSchema({
     type: Object
   },
 
-  // "app.$.createdAt": {
-  //   type: Date,
-  //   autoform: {
-  //     omit: true,
-  //   },
-  //   autoValue: function() {
-  //     if (this.isInsert) {
-  //       return new Date();
-  //     } else if (this.isUpsert) {
-  //       return {$setOnInsert: new Date()};
-  //     } else {
-  //       this.unset();  // Prevent user from supplying their own value
-  //     }
-  //   }
-  // },
-  //
-  // "app.$.updatedAt": {
-  //   type: Date,
-  //   autoValue: function() {
-  //     if (this.isUpdate) {
-  //       return new Date();
-  //     }
-  //   },
-  //   autoform: {
-  //     omit: true,
-  //   },
-  //   denyInsert: true,
-  //   optional: true
-  // },
-
   "app.$.appName": {
     type: String,
     label: "What is the name of the Application you are adding to this Process?",
@@ -182,7 +152,80 @@ ProcessSchema = new SimpleSchema({
   //       return sumArray.reduce(getSum);
   //     }
   //   }
-  // }
+  // },
+
+  "app.$.scenarios.$.activities": {
+    type: Array,
+    label: "What activities are in this scenario?",
+    optional: true,
+    autoform: {
+      omit: true,
+    }
+  },
+
+  "app.$.scenarios.$.activities.$": {
+    type: Object
+  },
+
+  "app.$.scenarios.$.activities.$.name": {
+    type: String,
+    label: "What is the name of this Activity?"
+  },
+
+  "app.$.scenarios.$.activities.$.times": {
+    type: Number,
+    // label: function(){
+    //   if(Meteor.isClient && !this.isSet){
+    //     var pro = Session.get('process');
+    //     var process = Processes.findOne(pro);
+    //     if (process == undefined) {
+    //       return "wait"
+    //     } else {
+    //       var timeNum = process.timeperiod.duration;
+    //       var timeType = process.timeperiod.type;
+    //       var res = "What is the number of times this activity occurs per " + timeNum + " " + timeType + "?";
+    //       return res;
+    //     }
+    //   }
+    // }
+  },
+
+  "app.$.scenarios.$.activities.$.percent": {
+    type: Number,
+    label: "What % of the time does the occurance of this activity cause downtime?",
+    min: 0,
+    max: 100,
+    defaultValue: 0
+  },
+
+  // rollup: {
+  //   type: Number,
+  //   autoform: {
+  //     omit: true,
+  //   },
+  //   autoValue: function(){
+  //     var sumArray = [];
+  //     var subs = Subactivities.find({activity: this.docId}).fetch();
+  //     _.forEach(subs, function(sub){
+  //       sumArray.push(sub.rollup);
+  //     });
+  //     function getSum(total, num){
+  //       return total + num;
+  //     }
+  //     if(!this.field('times').isSet){
+  //       var actTimes = Activities.findOne(this.docId).times;
+  //       var sumed = sumArray.reduce(getSum);
+  //       return sumed * actTimes;
+  //     } else if (sumArray == 0) {
+  //       return 0;
+  //     } else {
+  //       var sumed = sumArray.reduce(getSum);
+  //       var times = this.field('times').value;
+  //       var rv = sumed * times;
+  //       return rv;
+  //     }
+  //   }
+  // },
 
   timeperiod: {
     type: Object,

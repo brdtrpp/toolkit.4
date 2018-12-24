@@ -48,6 +48,15 @@ Template.process.helpers({
     }
   },
 
+  inApp(){
+    var appId = Session.get("appId");
+    if (appId === undefined){
+      return false;
+    } else {
+      return true;
+    }
+  },
+
   scenario(){
     var appId = Session.get("appId");
     if (appId === undefined ){
@@ -60,7 +69,21 @@ Template.process.helpers({
         return app.scenarios
       }
     }
+  },
 
+  scenarioNumber(){
+    var appId = Session.get("appId");
+    var proApps = this.app;
+    if (proApps != undefined){
+      var num = proApps.findIndex(i => i.appName === appId);
+      if (num === -1) {
+        return "app.0.scenarios";
+      } else {
+        return "app."+ num +".scenarios";
+      }
+    } else {
+      return "app.0.scenarios";
+    }
   }
 
 });

@@ -10,38 +10,56 @@
              <i class="app fas fa-ellipsis-v" aria-hidden="true"></i>
            </button>
            <ul class="dropdown-menu app">
-             <li><a href="#" class="app clone-application"><span class="fas fa-redo-alt"></span> Clone Application</a></li>
-             <li><a href="#" class="app template-application"><span class="glyphicon glyphicon-file"></span> Templatize Application</a></li>
-             <li><a href="#" class="app edit-application" data-toggle="modal" data-target="#appModal"><span class="glyphicon glyphicon-pencil"></span> Edit Application</a></li>
-             <li><a href="#" class="app delete-application"><span class="glyphicon glyphicon-trash"></span> Delete Application</a></li>
+             <li class="pointer2"><span class="fas fa-redo-alt clone-application"></span> Clone Application</li>
+             <li class="pointer2"><span class="far fa-file template-application"></span> Templatize Application</li>
+             <li class="pointer2"><span class="fas fa-pencil-alt edit-application"></span> Edit Application</li>
+             <li class="pointer2"><span class="fas fa-trash delete-application"></span> Delete Application</li>
            </ul>
           </div>
         {{/each}}
         <button type="button" class="btn btn-warning app" data-toggle="collapse" href="#addAppForm" role="button" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Application</button>
     </div>
-    <div class="collapse" id="addAppForm">
-      <div class="card card-body">
-        {{>quickForm collection="Processes" id="insertApp" doc=this type="update-pushArray" scope="app"}}
+    <div class="row">
+      <div class="collapse" id="addAppForm">
+        <div class="card card-body">
+          {{>quickForm collection="Processes" id="insertApp" doc=this type="update-pushArray" scope="app"}}
+        </div>
       </div>
     </div>
 
     {{#each scenario}}
     <div class="card mb-3 border-success">
-       <div class="card-header text-white bg-success">Header</div>
+       <div class="card-header text-white bg-success">{{sceName}}
+         <div class='pull-right'>$number
+            <div class="btn-group pointer2">
+              <button type="button" class="btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v pointer"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="pointer2"><span class="fas fa-redo-alt clone-scenario"></span> Clone Scenario</li>
+                <li class="pointer2"><span class="far fa-file template-scenario"></span> Templatize Scenario</li>
+                <li class="pointer2"><span class="fas fa-pencil-alt edit-scenario"></span> Edit Scenario</li>
+                <li class="pointer2"><span class="fas fa-trash delete-scenario"></span> Delete Scenario</li>
+              </ul>
+            </div>
+          </div>
+       </div>
        <div class="card-body">
-          <h5 class="card-title">Success card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">{{sceDescription}}</h5>
+          {{> activity}}
        </div>
     </div>
     {{/each}}
+    {{#if inApp}}
     <div class="card card-default mb-3">
        <div class="card-header addSce" style="cursor: pointer;">Add A Scenario</div>
        <div class="card-body collapse" id="addSce">
            <p class="card-text">
-             {{>quickForm collection="Processes" id="insertSce" doc=this type="update-pushArray" scope="app.0.scenarios"}}
+             {{>quickForm collection="Processes" id="insertSce" doc=this type="update-pushArray" scope=scenarioNumber}}
            </p>
        </div>
     </div>
+    {{/if}}
 
 
 </template>
