@@ -1,0 +1,43 @@
+<template name="processes">
+  {{#if viewing}}
+    <div class="content-heading">
+       <div>Processes</div>
+    </div>
+    <div class="row">
+      {{#each process}}
+        <div class="col-md-4">
+            <div class="card border-primary mb-3"  style="cursor: pointer;">
+              <!-- <a href="{{pathFor route='process' data=getPro}}" class="go"> -->
+              <a href="/process/{{_id}}">
+                <div class="card-header"><h3>{{name}}</h3></div>
+                <div class="card-body">
+                  <p class="card-text">{{description}}</p>
+                </div>
+              </a>
+            </div>
+        </div>
+      {{/each}}
+      <div class="col-md-4">
+          <div class="addProcess" style="cursor: pointer;">
+            <div class="card mb-3 text-center">
+              <div class="card-header"><h3>Add A Process</h3></div>
+              <div class="card-body">
+                <p class="card-text">Click here to create a new process.</p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="content-heading">
+       <div role="button" class="addProcess" style="cursor: pointer;">
+         <i class='fas fa-angle-left'> </i>
+         <a>&nbsp;&nbsp;Add a Process</a>
+       </div>
+    </div>
+    <div class="row">
+
+    </div>
+    {{> quickForm collection="Processes" id="insertProcess" type="insert"}}
+  {{/if}}
+</template>

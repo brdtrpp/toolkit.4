@@ -1,0 +1,24 @@
+{
+  "dashboard": {
+    "WELCOME": "Welcome to Angle !"
+  },
+  "topbar": {
+    "search": {
+      "PLACEHOLDER": "Type and hit enter.."
+    }
+  },
+  "sidebar": {
+    "WELCOME": "Welcome",
+    "heading": {
+      "HEADER": "Main Navigation"
+    },
+    "nav": {
+      "DASHBOARD": "Dashboard",
+      "PROCESSES": "Processes",
+      "menu": {
+        "MENU": "Menu",
+        "SUBMENU": "Sub Menu"
+      }
+    }
+  }
+}

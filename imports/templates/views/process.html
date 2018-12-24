@@ -1,0 +1,17 @@
+<template name="process">
+    <div class="content-heading">
+       <div>Process - {{name}}</div>
+    </div>
+    <div class="row">
+        {{#each app}}
+         {{name}}
+        {{/each}}
+    </div>
+
+      {{>quickForm collection="Processes" id="insertApp" doc=this type="update-pushArray" scope="app"}}
+      <!-- {{#autoForm collection="Processes" id="insertApp" doc=this type="update-pushArray" scope="app"}}
+        {{> afQuickField name='name'}}
+        <button type="submit" class="btn btn-primary">Insert</button>
+      {{/autoform}} -->
+
+</template>
