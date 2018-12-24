@@ -32,7 +32,7 @@
        <div class="card-header text-white bg-success">{{sceName}}
          <div class='pull-right'>$number
             <div class="btn-group pointer2">
-              <button type="button" class="btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-success header-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v pointer"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
@@ -52,7 +52,7 @@
     {{/each}}
     {{#if inApp}}
     <div class="card card-default mb-3">
-       <div class="card-header addSce" style="cursor: pointer;">Add A Scenario</div>
+       <div class="card-header addSce pointer">Add A Scenario</div>
        <div class="card-body collapse" id="addSce">
            <p class="card-text">
              {{>quickForm collection="Processes" id="insertSce" doc=this type="update-pushArray" scope=scenarioNumber}}

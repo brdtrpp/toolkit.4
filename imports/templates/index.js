@@ -23,3 +23,6 @@ import './views/process.js';
 // Activities
 import './views/activity.html';
 import './views/activity.js';
+// Subactivities
+import './views/subactivity.html';
+import './views/subactivity.js';
