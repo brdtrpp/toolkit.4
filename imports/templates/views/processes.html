@@ -3,23 +3,25 @@
     <div class="content-heading">
        <div>Processes</div>
     </div>
-    <div class="row">
-      {{#each process}}
+    <div class="container-fluid">
+      <div class="row">
+        {{#each process}}
+          <div class="col-md-4">
+            <div class="card mb-3 border-info goPro pointer">
+               <div class="card-header text-white bg-info">{{name}}</div>
+               <div class="card-body">
+                  <p class="card-text">{{description}}</p>
+               </div>
+            </div>
+          </div>
+        {{/each}}
         <div class="col-md-4">
-          <div class="card mb-3 border-info goPro pointer">
-             <div class="card-header text-white bg-info">{{name}}</div>
+          <div class="card card-default mb-3 addProcess pointer">
+             <div class="card-header">Add A Process</div>
              <div class="card-body">
-                <p class="card-text">{{description}}</p>
+                <p class="card-text">Click here to create a new process.</p>
              </div>
           </div>
-        </div>
-      {{/each}}
-      <div class="col-md-4">
-        <div class="card card-default mb-3 addProcess pointer">
-           <div class="card-header">Add A Process</div>
-           <div class="card-body">
-              <p class="card-text">Click here to create a new process.</p>
-           </div>
         </div>
       </div>
     </div>
@@ -30,7 +32,9 @@
          <a>&nbsp;&nbsp;Add a Process</a>
        </div>
     </div>
-    {{> quickForm collection="Processes" id="insertProcess" type="insert"}}
+    <div class="container-fluid">
+      {{> quickForm collection="Processes" id="insertProcess" type="insert"}}
+    </div>
   {{/if}}
 
 </template>

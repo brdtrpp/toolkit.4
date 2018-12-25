@@ -84,17 +84,20 @@ ProcessSchema = new SimpleSchema({
     type: String,
     label: "What is the name of the Application you are adding to this Process?",
     custom(){
-        let pro = Processes.findOne({_id: this.docId});
+      if (Meteor.isClient && this.isSet) {
+        var proId = Session.get('pro');
+        let pro = Processes.findOne({_id: proId});
         if (pro.app == undefined) {
           app = undefined;
         } else {
-          app = pro.app.find(o => o.appName === this.value);
-        }
+          app = _.findWhere(pro.app, {appName: this.value});
+        };
         if (app != undefined) {
           return SimpleSchema.ErrorTypes.REQUIRED;
         } else {
           return undefined;
         }
+      }
     }
   },
 
@@ -128,6 +131,7 @@ ProcessSchema = new SimpleSchema({
 
   "app.$.scenarios.$.sceState": {
     type: String,
+    label: "Is this a current scenario or a proposed one?"
     // allowedValues: ["current", "future"],
   },
 

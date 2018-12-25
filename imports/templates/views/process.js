@@ -1,24 +1,22 @@
 // Running code only when the template has been created, BUT NOT RENDERED YET!!
-Template.process.onCreated = function() {
-
-};
+Template.process.onCreated(function() {
+  Session.set('pro', this.data._id);
+});
 
 // Running code only when the template has been fully rendered
-Template.process.onRendered = function() {
-
-};
+Template.process.onRendered(function() {
+  Session.set('pro', this.data._id);
+});
 
 // Adding events per template
 Template.process.events({
   'click .app': function(){
     Session.set('appId', this.appName);
-    $('#addSce').collapse('hide');
-    $('#addAppForm').collapse('hide');
+    Session.set('modalStatus', "app");
   },
 
   'click .addSce': function(){
-    $('#addSce').collapse('toggle');
-    $('#addAppForm').collapse('hide');
+    Session.set('modalStatus', "sce");
   },
     // 'click .clone-application': function(){
     //   var app = Session.get('app');
@@ -68,21 +66,6 @@ Template.process.helpers({
       } else {
         return app.scenarios
       }
-    }
-  },
-
-  scenarioNumber(){
-    var appId = Session.get("appId");
-    var proApps = this.app;
-    if (proApps != undefined){
-      var num = proApps.findIndex(i => i.appName === appId);
-      if (num === -1) {
-        return "app.0.scenarios";
-      } else {
-        return "app."+ num +".scenarios";
-      }
-    } else {
-      return "app.0.scenarios";
     }
   }
 

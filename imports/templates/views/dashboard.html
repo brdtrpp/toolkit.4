@@ -1,27 +1,316 @@
 <template name="dashboard">
-    <div class="content-heading">
-       <div>Single View
-          <small>{{_"dashboard.WELCOME"}}</small>
-       </div>
-        <!-- START Language list-->
-        <div class="ml-auto">
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle dropdown-toggle-nocaret" type="button" data-toggle="dropdown">English</button>
-                <div class="dropdown-menu dropdown-menu-right-forced animated fadeInUpShort" role="menu">
-                    <a class="dropdown-item" href="#" data-set-lang="en">English</a>
-                    <a class="dropdown-item" href="#" data-set-lang="es">Spanish</a>
-                </div>
-            </div>
+  <div class="content-heading">
+     <div>Dashboard
+        <small>Welcome to Angle!</small>
+     </div>
+     <!-- START Language list-->
+     <div class="ml-auto">
+        <div class="btn-group">
+           <button class="btn btn-secondary dropdown-toggle dropdown-toggle-nocaret" type="button" data-toggle="dropdown">English</button>
+           <div class="dropdown-menu dropdown-menu-right-forced animated fadeInUpShort" role="menu"><a class="dropdown-item" href="#" data-set-lang="en">English</a><a class="dropdown-item" href="#" data-set-lang="es">Spanish</a>
+           </div>
         </div>
-        <!-- END Language list-->
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <h2 class="text-thin">Single view content</h2>
-            <p>This project is an application skeleton. You can use it to quickly bootstrap your webapp projects and dev environment for these projects.
-                <br>The seed app doesn't do much and has most of the feature removed so you can add theme as per your needs just following the demo app examples.</p>
-            <div class="text-center customevent"><a href="#" class="btn btn-primary">Custom event test</a></div>
-            <p>{{ alert }}</p>
+     </div>
+     <!-- END Language list-->
+  </div>
+  <div class="row">
+     <div class="col-xl-4">
+        <!-- START List group-->
+        <div class="list-group mb-3">
+           <div class="list-group-item">
+              <div class="d-flex align-items-center py-3">
+                 <div class="w-50 px-3">
+                    <p class="m-0 lead">1204</p>
+                    <p class="m-0 text-sm">Commits this month</p>
+                 </div>
+                 <div class="w-50 px-3 text-center">
+                    <div data-sparkline="" data-bar-color="#23b7e5" data-height="60" data-bar-width="10" data-bar-spacing="6" data-chart-range-min="0" data-values="3,6,7,8,4,5"><canvas width="90" height="60" style="display: inline-block; width: 90px; height: 60px; vertical-align: top;"></canvas></div>
+                 </div>
+              </div>
+           </div>
+           <div class="list-group-item">
+              <div class="d-flex align-items-center py-3">
+                 <div class="w-50 px-3">
+                    <p class="m-0 lead">$ 3,200.00</p>
+                    <p class="m-0 text-sm">Available budget</p>
+                 </div>
+                 <div class="w-50 px-3 text-center">
+                    <div data-sparkline="" data-type="line" data-height="60" data-width="80%" data-line-width="2" data-line-color="#7266ba" data-chart-range-min="0" data-spot-color="#888" data-min-spot-color="#7266ba" data-max-spot-color="#7266ba" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" data-values="7,3,4,7,5,9,4,4,7,5,9,6,4" data-resize="true"><canvas width="290" height="60" style="display: inline-block; width: 290.797px; height: 60px; vertical-align: top;"></canvas></div>
+                 </div>
+              </div>
+           </div>
+           <div class="list-group-item">
+              <div class="d-flex align-items-center py-3">
+                 <div class="w-50 px-3">
+                    <p class="m-0 lead">67</p>
+                    <p class="m-0 text-sm">New followers</p>
+                 </div>
+                 <div class="w-50 px-3 text-center">
+                    <div class="d-flex align-items-center flex-wrap justify-content-center">
+                       <a href="#" data-toggle="tooltip" title="Katie">
+                          <img class="circle thumb24 mx-1" src="img/user/02.jpg" alt="Follower">
+                       </a>
+                       <a href="#" data-toggle="tooltip" title="Cody">
+                          <img class="circle thumb24 mx-1" src="img/user/01.jpg" alt="Follower">
+                       </a>
+                       <a href="#" data-toggle="tooltip" title="Tamara">
+                          <img class="circle thumb24 mx-1" src="img/user/03.jpg" alt="Follower">
+                       </a>
+                       <a href="#" data-toggle="tooltip" title="Gene">
+                          <img class="circle thumb24 mx-1" src="img/user/04.jpg" alt="Follower">
+                       </a>
+                       <a href="#" data-toggle="tooltip" title="Marsha">
+                          <img class="circle thumb24 mx-1" src="img/user/04.jpg" alt="Follower">
+                       </a>
+                       <a href="#" data-toggle="tooltip" title="Robin">
+                          <img class="circle thumb24 mx-1" src="img/user/09.jpg" alt="Follower">
+                       </a>
+                    </div>
+                 </div>
+              </div>
+           </div>
         </div>
-    </div>
+        <!-- END List group-->
+     </div>
+     <div class="col-xl-8">
+        <!-- START bar chart-->
+        <div class="card" id="cardChart3">
+           <div class="card-header">
+              <!-- START button group-->
+              <div class="float-right btn-group">
+                 <button class="dropdown-toggle dropdown-toggle-nocaret btn btn-secondary btn-sm" type="button" data-toggle="dropdown">Monthly</button>
+                 <div class="dropdown-menu dropdown-menu-right-forced fadeInLeft animated" role="menu"><a class="dropdown-item" href="#">Daily</a><a class="dropdown-item" href="#">Monthly</a><a class="dropdown-item" href="#">Yearly</a>
+                 </div>
+              </div>
+              <!-- END button group-->
+              <div class="card-title">Projects Hours</div>
+           </div>
+           <div class="card-wrapper">
+              <div class="card-body">
+                 <div class="chart-bar-stackedv2 flot-chart" style="padding: 0px; position: relative;"><canvas class="flot-base" width="781" height="250" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 781px; height: 250px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 34px; text-align: center;">Pj1</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 93px; text-align: center;">Pj2</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 153px; text-align: center;">Pj3</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 212px; text-align: center;">Pj4</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 271px; text-align: center;">Pj5</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 330px; text-align: center;">Pj6</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 389px; text-align: center;">Pj7</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 449px; text-align: center;">Pj8</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 508px; text-align: center;">Pj9</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 564px; text-align: center;">Pj10</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 623px; text-align: center;">Pj11</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 682px; text-align: center;">Pj12</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 60px; top: 232px; left: 742px; text-align: center;">Pj13</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div class="flot-tick-label tickLabel" style="position: absolute; top: 219px; left: 13px; text-align: right;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 182px; left: 7px; text-align: right;">25</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 146px; left: 7px; text-align: right;">50</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 110px; left: 7px; text-align: right;">75</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 73px; left: 1px; text-align: right;">100</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 37px; left: 1px; text-align: right;">125</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 1px; left: 1px; text-align: right;">150</div></div></div><canvas class="flot-overlay" width="781" height="250" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 781px; height: 250px;"></canvas><div class="legend"><div style="position: absolute; width: 80px; height: 63px; top: 14px; right: 16px; background-color: rgb(252, 252, 252); opacity: 0.85;"> </div><table style="position:absolute;top:14px;right:16px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #9289ca;overflow:hidden"></div></div></td><td class="legendLabel">Pending</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #7266ba;overflow:hidden"></div></div></td><td class="legendLabel">Assigned</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #564aa3;overflow:hidden"></div></div></td><td class="legendLabel">Completed</td></tr></tbody></table></div></div>
+              </div>
+           </div>
+        </div>
+        <!-- END bar chart-->
+     </div>
+  </div>
+  <div class="unwrap my-3">
+     <!-- START chart-->
+     <div class="card" id="cardChart9">
+        <div class="card-header">
+           <!-- START button group-->
+           <div class="float-right btn-group">
+              <button class="dropdown-toggle dropdown-toggle-nocaret btn btn-secondary btn-sm" type="button" data-toggle="dropdown">All time</button>
+              <div class="dropdown-menu dropdown-menu-right-forced fadeInLeft animated" role="menu"><a class="dropdown-item" href="#">Daily</a><a class="dropdown-item" href="#">Monthly</a>
+                 <div class="dropdown-divider"></div><a class="dropdown-item" href="#">All time</a>
+              </div>
+           </div>
+           <!-- END button group-->
+           <div class="card-title">Overall progress</div>
+        </div>
+        <div class="card-wrapper">
+           <div class="card-body">
+              <div class="chart-splinev2 flot-chart" style="padding: 0px; position: relative;"><canvas class="flot-base" width="821" height="250" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 821px; height: 250px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 15px; text-align: center;">Jan</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 87px; text-align: center;">Feb</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 158px; text-align: center;">Mar</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 230px; text-align: center;">Apr</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 300px; text-align: center;">May</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 373px; text-align: center;">Jun</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 446px; text-align: center;">Jul</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 516px; text-align: center;">Aug</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 587px; text-align: center;">Sep</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 659px; text-align: center;">Oct</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 730px; text-align: center;">Nov</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 68px; top: 232px; left: 802px; text-align: center;">Dec</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div class="flot-tick-label tickLabel" style="position: absolute; top: 219px; left: 13px; text-align: right;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 146px; left: 7px; text-align: right;">50</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 74px; left: 1px; text-align: right;">100</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 2px; left: 1px; text-align: right;">150</div></div></div><canvas class="flot-overlay" width="821" height="250" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 821px; height: 250px;"></canvas><div class="legend"><div style="position: absolute; width: 70px; height: 43px; top: 15px; right: 15px; background-color: rgb(252, 252, 252); opacity: 0.85;"> </div><table style="position:absolute;top:15px;right:15px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #23b7e5;overflow:hidden"></div></div></td><td class="legendLabel">Hours</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #7266ba;overflow:hidden"></div></div></td><td class="legendLabel">Commits</td></tr></tbody></table></div></div>
+           </div>
+           <div class="card-body">
+              <div class="row">
+                 <div class="col-md-3 col-6 text-center">
+                    <p>Projects</p>
+                    <div class="h1">25</div>
+                 </div>
+                 <div class="col-md-3 col-6 text-center">
+                    <p>Teammates</p>
+                    <div class="h1">85</div>
+                 </div>
+                 <div class="col-md-3 col-6 text-center">
+                    <p>Hours</p>
+                    <div class="h1">380</div>
+                 </div>
+                 <div class="col-md-3 col-6 text-center">
+                    <p>Budget</p>
+                    <div class="h1 text-truncate">$ 10,000.00</div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- END chart-->
+  </div>
+  <!-- START radial charts-->
+  <div class="row mb-3">
+     <div class="col-lg-3 col-6 text-center">
+        <p>Current Project</p>
+        <div class="text-center py-4">
+           <div class="easypie-chart easypie-chart-md" data-easypiechart="" data-percent="60" data-animate="{duration: 800, enabled: true}" data-bar-color="#23b7e5" data-track-color="#edf2f6" data-scale-color="false" data-line-width="2" data-line-cap="round" data-size="130">
+              <span>60%</span>
+           <canvas height="130" width="130"></canvas></div>
+        </div>
+     </div>
+     <div class="col-lg-3 col-6 text-center">
+        <p>Current Progress</p>
+        <div class="text-center py-4">
+           <div class="easypie-chart easypie-chart-md" data-easypiechart="" data-percent="30" data-animate="{duration: 800, enabled: true}" data-bar-color="#f532e5" data-track-color="#edf2f6" data-scale-color="false" data-line-width="2" data-line-cap="round" data-size="130">
+              <span>30%</span>
+           <canvas height="130" width="130"></canvas></div>
+        </div>
+     </div>
+     <div class="col-lg-3 col-6 text-center">
+        <p>Space Usage</p>
+        <div class="text-center py-4">
+           <div class="easypie-chart easypie-chart-md" data-easypiechart="" data-percent="50" data-animate="{duration: 800, enabled: true}" data-bar-color="#7266ba" data-track-color="#edf2f6" data-scale-color="false" data-line-width="2" data-line-cap="round" data-size="130">
+              <span>50%</span>
+           <canvas height="130" width="130"></canvas></div>
+        </div>
+     </div>
+     <div class="col-lg-3 col-6 text-center">
+        <p>Interactions</p>
+        <div class="text-center py-4">
+           <div class="easypie-chart easypie-chart-md" data-easypiechart="" data-percent="75" data-animate="{duration: 800, enabled: true}" data-bar-color="#ff902b" data-track-color="#edf2f6" data-scale-color="false" data-line-width="2" data-line-cap="round" data-size="130">
+              <span>75%</span>
+           <canvas height="130" width="130"></canvas></div>
+        </div>
+     </div>
+  </div>
+  <!-- START radial charts-->
+  <!-- START Multiple List group-->
+  <div class="list-group mb-3">
+     <a class="list-group-item" href="#">
+        <table class="wd-wide">
+           <tbody>
+              <tr>
+                 <td class="wd-xs">
+                    <div class="px-2">
+                       <img class="img-fluid rounded thumb64" src="img/dummy.png" alt="">
+                    </div>
+                 </td>
+                 <td>
+                    <div class="px-2">
+                       <h4 class="mb-2">Project A</h4>
+                       <small class="text-muted">Vestibulum ante ipsum primis in faucibus orci</small>
+                    </div>
+                 </td>
+                 <td class="wd-sm d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0">Last change</p>
+                       <small class="text-muted">4 weeks ago</small>
+                    </div>
+                 </td>
+                 <td class="wd-xs d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0 text-muted">
+                          <em class="icon-people mr-2 fa-lg"></em>26</p>
+                    </div>
+                 </td>
+                 <td class="wd-xs d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0 text-muted">
+                          <em class="icon-doc mr-2 fa-lg"></em>3500</p>
+                    </div>
+                 </td>
+                 <td class="wd-sm">
+                    <div class="px-2">
+                       <div class="progress-bar progress-xs bg-success" style="width: 80%;">
+                          <span class="sr-only">80%</span>
+                       </div>
+                    </div>
+                 </td>
+              </tr>
+           </tbody>
+        </table>
+     </a>
+  </div>
+  <div class="list-group mb-3">
+     <a class="list-group-item" href="#">
+        <table class="wd-wide">
+           <tbody>
+              <tr>
+                 <td class="wd-xs">
+                    <div class="px-2">
+                       <img class="img-fluid rounded thumb64" src="img/dummy.png" alt="">
+                    </div>
+                 </td>
+                 <td>
+                    <div class="px-2">
+                       <h4 class="mb-2">Project X</h4>
+                       <small class="text-muted">Vestibulum ante ipsum primis in faucibus orci</small>
+                    </div>
+                 </td>
+                 <td class="wd-sm d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0">Last change</p>
+                       <small class="text-muted">Today at 06:23 am</small>
+                    </div>
+                 </td>
+                 <td class="wd-xs d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0 text-muted">
+                          <em class="icon-people mr-2 fa-lg"></em>3</p>
+                    </div>
+                 </td>
+                 <td class="wd-xs d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0 text-muted">
+                          <em class="icon-doc mr-2 fa-lg"></em>150</p>
+                    </div>
+                 </td>
+                 <td class="wd-sm">
+                    <div class="px-2">
+                       <div class="progress-bar progress-xs bg-purple" style="width: 50%;">
+                          <span class="sr-only">50%</span>
+                       </div>
+                    </div>
+                 </td>
+              </tr>
+           </tbody>
+        </table>
+     </a>
+  </div>
+  <div class="list-group mb-3">
+     <a class="list-group-item" href="#">
+        <table class="wd-wide">
+           <tbody>
+              <tr>
+                 <td class="wd-xs">
+                    <div class="px-2">
+                       <img class="img-fluid rounded thumb64" src="img/dummy.png" alt="">
+                    </div>
+                 </td>
+                 <td>
+                    <div class="px-2">
+                       <h4 class="mb-2">Project Z</h4>
+                       <small class="text-muted">Vestibulum ante ipsum primis in faucibus orci</small>
+                    </div>
+                 </td>
+                 <td class="wd-sm d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0">Last change</p>
+                       <small class="text-muted">Yesterday at 10:20 pm</small>
+                    </div>
+                 </td>
+                 <td class="wd-xs d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0 text-muted">
+                          <em class="icon-people mr-2 fa-lg"></em>15</p>
+                    </div>
+                 </td>
+                 <td class="wd-xs d-none d-lg-table-cell">
+                    <div class="px-2">
+                       <p class="m-0 text-muted">
+                          <em class="icon-doc mr-2 fa-lg"></em>480</p>
+                    </div>
+                 </td>
+                 <td class="wd-sm">
+                    <div class="px-2">
+                       <div class="progress-bar progress-xs bg-green" style="width: 20%;">
+                          <span class="sr-only">20%</span>
+                       </div>
+                    </div>
+                 </td>
+              </tr>
+           </tbody>
+        </table>
+     </a>
+     <!-- END dashboard main content-->
+  </div>
+  <!-- END Multiple List group-->
 </template>

@@ -17,14 +17,9 @@
            </ul>
           </div>
         {{/each}}
-        <button type="button" class="btn btn-warning app" data-toggle="collapse" href="#addAppForm" role="button" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Application</button>
-    </div>
-    <div class="row">
-      <div class="collapse" id="addAppForm">
-        <div class="card card-body">
-          {{>quickForm collection="Processes" id="insertApp" doc=this type="update-pushArray" scope="app"}}
-        </div>
-      </div>
+        <button type="button" class="btn btn-warning app" data-toggle="modal" data-target="#formModal">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Application
+        </button>
     </div>
 
     {{#each scenario}}
@@ -51,13 +46,8 @@
     </div>
     {{/each}}
     {{#if inApp}}
-    <div class="card card-default mb-3">
-       <div class="card-header addSce pointer">Add A Scenario</div>
-       <div class="card-body collapse" id="addSce">
-           <p class="card-text">
-             {{>quickForm collection="Processes" id="insertSce" doc=this type="update-pushArray" scope=scenarioNumber}}
-           </p>
-       </div>
+    <div class="card card-default mb-3 pointer" data-toggle="modal" data-target="#formModal">
+       <div class="card-header addSce">Add A Scenario</div>
     </div>
     {{/if}}
 

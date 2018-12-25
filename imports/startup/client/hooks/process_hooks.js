@@ -2,7 +2,7 @@ AutoForm.hooks({
   insertApp: {
     onSuccess: function(formType, result) {
       Bert.alert( 'Application was added!', 'success', 'growl-top-right' );
-      $('#addAppForm').collapse('hide');
+      $('#formModal').modal('hide');
     },
      onError: function(formType, error) {
        Bert.alert( 'Application was NOT added!', 'danger', 'growl-top-right' );
@@ -26,11 +26,22 @@ AutoForm.hooks({
   },
 
   insertSce: {
+    before:{
+      "update-pushArray": function(doc){
+        return doc;
+      }
+    },
+
+    after: {
+      "update-pushArray": function(error, result) {
+      }
+    },
     onSuccess: function(formType, result) {
       Bert.alert( 'Scenario was added!', 'success', 'growl-top-right' );
-      $('#addSce').collapse('hide');
+      $('#formModal').modal('hide');
     },
      onError: function(formType, error) {
+       console.log(error);
        Bert.alert( 'Scenario was NOT added!', 'danger', 'growl-top-right' );
      },
 

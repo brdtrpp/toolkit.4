@@ -26,3 +26,6 @@ import './views/activity.js';
 // Subactivities
 import './views/subactivity.html';
 import './views/subactivity.js';
+// modal
+import './common/modal.html';
+import './common/modal.js';

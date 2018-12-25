@@ -1,0 +1,22 @@
+<template name="modal">
+  <!-- Modal -->
+  <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModal">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{#if statusApp}}
+            {{>quickForm collection="Processes" id="insertApp" doc=proId type="update-pushArray" scope="app"}}
+          {{else if statusSce}}
+            {{>quickForm collection="Processes" id="insertSce" doc=proId type="update-pushArray" scope=scenarioNumber}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
