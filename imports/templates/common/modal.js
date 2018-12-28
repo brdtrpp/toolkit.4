@@ -25,7 +25,8 @@ Template.modal.helpers({
         case "sce":
           Session.set('formId', "insertSce");
           Session.set('modalTitle', "Add a Scenario");
-          return "app.0.scenarios";
+          var appIndex = Session.get("appIndex");
+          return "app."+appIndex+".scenarios";
         case "act":
           Session.set('formId', "insertAct");
           Session.set('modalTitle', "Add an Activity");

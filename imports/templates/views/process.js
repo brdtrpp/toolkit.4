@@ -13,12 +13,15 @@ Template.process.events({
   'click .app': function(){
     var proId = Session.get('pro');
     var app = Processes.findOne({_id: proId}).app;
-    var appName = this.appName;
-    var appIndex = app.indexOf(obj => obj.appname === "asdfasdfasdf");
-    console.log(app);
-    console.log(appObj);
-    console.log(appIndex);
 
+    if (app === undefined){
+      Session.set("appIndex", 0);
+    } else {
+      var appIndex = app.findIndex(obj => obj.appName == this.appName);
+      Session.set("appIndex", appIndex);
+    }
+
+    var appName = this.appName;
     Session.set('appId', appName);
     Session.set('modalStatus', "app");
   },
