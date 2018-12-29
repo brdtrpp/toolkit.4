@@ -26,15 +26,21 @@ Template.modal.helpers({
           Session.set('formId', "insertSce");
           Session.set('modalTitle', "Add a Scenario");
           var appIndex = Session.get("appIndex");
+          console.log(appIndex);
           return "app."+appIndex+".scenarios";
         case "act":
           Session.set('formId', "insertAct");
           Session.set('modalTitle', "Add an Activity");
-          return "app.0.scenarios.0.activities";
+          var appIndex = Session.get("appIndex");
+          var sceIndex = Session.get("sceIndex")
+          console.log(sceIndex);
+          return "app."+appIndex+".scenarios."+sceIndex+".activities";
         case "sub":
           Session.set('formId', "insertSub");
           Session.set('modalTitle', "Add a Subactivity");
-          return "app.0.scenarios.0.activities.0.subactivity";
+          var appIndex = Session.get("appIndex");
+          var sceIndex = Session.get("sceIndex")
+          return "app."+appIndex+".scenarios."+sceIndex+".activities";
         default:
           Session.set('formId', "unkownForm");
           Session.set('modalTitle', "unkownForm");

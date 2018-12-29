@@ -8,8 +8,6 @@ AutoForm.hooks({
     },
     onSuccess: function(formType, result) {
       Bert.alert( 'Application was added!', 'success', 'growl-top-right' );
-      console.log(result);
-
       $('#formModal').modal('hide');
     },
      onError: function(formType, error) {
@@ -68,6 +66,11 @@ AutoForm.hooks({
     after: {
       "update-pushArray": function(error, result) {
       }
+    },
+
+    onSuccess: function(formType, result) {
+      Bert.alert( 'Activity was added!', 'success', 'growl-top-right' );
+      $('#formModal').modal('hide');
     },
     beginSubmit: function() {},
     endSubmit: function() {},
