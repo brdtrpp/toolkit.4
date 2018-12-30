@@ -1,11 +1,5 @@
 AutoForm.hooks({
   insertApp: {
-    before:{
-      "update-pushArray": function(doc){
-        Session.set('appId', doc.appName);
-        return doc;
-      }
-    },
     onSuccess: function(formType, result) {
       Bert.alert( 'Application was added!', 'success', 'growl-top-right' );
       $('#formModal').modal('hide');
@@ -32,16 +26,6 @@ AutoForm.hooks({
   },
 
   insertSce: {
-    before:{
-      "update-pushArray": function(doc){
-        return doc;
-      }
-    },
-
-    after: {
-      "update-pushArray": function(error, result) {
-      }
-    },
     onSuccess: function(formType, result) {
       Bert.alert( 'Scenario was added!', 'success', 'growl-top-right' );
       $('#formModal').modal('hide');
@@ -56,23 +40,46 @@ AutoForm.hooks({
   },
 
   insertAct:{
-    before:{
-      "update-pushArray": function(doc){
-        console.log(doc);
-        return doc;
-      }
-    },
-
-    after: {
-      "update-pushArray": function(error, result) {
-      }
-    },
-
     onSuccess: function(formType, result) {
       Bert.alert( 'Activity was added!', 'success', 'growl-top-right' );
       $('#formModal').modal('hide');
     },
+
+    onError: function(formType, error) {
+      console.log(error);
+      Bert.alert( 'Activity was NOT added!', 'danger', 'growl-top-right' );
+    },
+
+    beginSubmit: function() {},
+    endSubmit: function() {},
+  },
+
+  insertSub:{
+    onSuccess: function(formType, result) {
+      Bert.alert( 'Subactivity was added!', 'success', 'growl-top-right' );
+      $('#formModal').modal('hide');
+    },
+
+    onError: function(formType, error) {
+      console.log(error);
+      Bert.alert( 'Subactivity was NOT added!', 'danger', 'growl-top-right' );
+    },
+
     beginSubmit: function() {},
     endSubmit: function() {},
   }
 });
+
+// AutoForm.addHooks(['insertProcess', 'insertApp', 'insertSce', 'insertAct', 'insertSub'], hooksObject);
+//
+// var hooksObject = {
+//   onSuccess: function(formType, result) {
+//     Bert.alert( 'Application was added!', 'success', 'growl-top-right' );
+//     $('#formModal').modal('hide');
+//   },
+//   onError: function(formType, error) {
+//     Bert.alert( 'Application NOT was added!', 'danger', 'growl-top-right' );
+//   },
+//   beginSubmit: function() {},
+//   endSubmit: function() {}
+// };

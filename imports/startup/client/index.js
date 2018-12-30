@@ -9,5 +9,5 @@ import '/imports/styles/bootstrap.scss';
 import '/imports/styles/app.scss';
 // Routes
 import './routes.js';
-// Hooks
+// hooks
 import './hooks/process_hooks.js';

@@ -9,7 +9,7 @@
            <button type="button" class="btn btn-{{active}} app" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <i class="app fas fa-ellipsis-v" aria-hidden="true"></i>
            </button>
-           <ul class="dropdown-menu app">
+           <ul class="dropdown-menu">
              <li class="pointer2"><span class="fas fa-redo-alt clone-application"></span> Clone Application</li>
              <li class="pointer2"><span class="far fa-file template-application"></span> Templatize Application</li>
              <li class="pointer2"><span class="fas fa-pencil-alt edit-application"></span> Edit Application</li>
@@ -17,18 +17,18 @@
            </ul>
           </div>
         {{/each}}
-        <button type="button" class="btn btn-primary app" data-toggle="modal" data-target="#formModal">
+        <button type="button" class="btn btn-primary addApp" data-toggle="modal" data-target="#formModal">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Application
         </button>
     </div>
-    
+
     {{#each scenarioItem}}
       {{>scenario}}
     {{/each}}
 
     {{#if inApp}}
-    <div class="card card-default mb-3 pointer" data-toggle="modal" data-target="#formModal">
-       <div class="card-header addSce">Add A Scenario</div>
+    <div class="card card-default mb-3 pointer addSce" data-toggle="modal" data-target="#formModal">
+       <div class="card-header">Add A Scenario</div>
     </div>
     {{/if}}
 

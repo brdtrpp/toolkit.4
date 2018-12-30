@@ -10,7 +10,11 @@ Template.scenario.onRendered = function() {
 
 // Adding events per template
 Template.scenario.events({
-  'click .act': function(){
+  'click .addAct': function(){
+    Session.set('modalStatus', "addAct");
+  },
+
+  'click .sceItem': function(){
     var proId = Session.get('pro');
     var app = Processes.findOne({_id: proId}).app;
     var appIndex = Session.get('appIndex');
@@ -21,12 +25,20 @@ Template.scenario.events({
       var sceIndex = sce.findIndex(obj => obj.sceName == this.sceName);
       Session.set("sceIndex", sceIndex);
     }
-    Session.set('modalStatus', "act");
   },
+
+  'click .colSce': function(){
+    var sceIndex = Session.get("sceIndex");
+    $("#sce"+sceIndex).collapse('toggle');
+  }
 });
 
 Template.scenario.helpers({
   activityItem(){
     return this.activities;
   },
+  sceIndex(){
+    var sceIndex = Session.get("sceIndex");
+    return "sce"+sceIndex;
+  }
 });

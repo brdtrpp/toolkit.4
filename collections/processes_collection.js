@@ -80,6 +80,23 @@ ProcessSchema = new SimpleSchema({
     type: Object
   },
 
+  // "app.$.id":{
+  //   type: String,
+  //   autoValue: function(){
+  //     if (this.isInsert){
+  //       console.log(this);
+  //       const id = Random.id();
+  //       console.log(id);
+  //       return id;
+  //     } else {
+  //       this.unset();
+  //     }
+  //   },
+  //   autoform: {
+  //     omit: true,
+  //   },
+  // },
+
   "app.$.appName": {
     type: String,
     label: "What is the name of the Application you are adding to this Process?",

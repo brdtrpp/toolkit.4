@@ -11,7 +11,7 @@ import './common/sidebar.js';
 import './common/topnavbar.horizontal.html';
 import './common/topnavbar.html';
 import './common/topnavbar.js';
-// DASHBOARD
+// Dashboard
 import './views/dashboard.html';
 import './views/dashboard.js';
 // Processes
@@ -29,6 +29,6 @@ import './views/activity.js';
 // Subactivities
 import './views/subactivity.html';
 import './views/subactivity.js';
-// modal
+// Modal
 import './common/modal.html';
 import './common/modal.js';

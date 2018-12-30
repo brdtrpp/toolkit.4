@@ -11,8 +11,9 @@
         </div>
         <div class="modal-body">
           {{#if processItem}}
-            {{>quickForm collection="Processes" id=formId doc=proId type="update-pushArray" scope=formScope}}
-          {{/if}}
+            {{scoped}}
+            {{>quickForm collection="Processes" id=formId doc=proId type=formType scope=formScope}}
+            {{/if}}
         </div>
       </div>
     </div>

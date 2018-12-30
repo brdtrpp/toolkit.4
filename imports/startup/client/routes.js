@@ -28,6 +28,7 @@ Router.route('/process/:id', function() {
   if (process === undefined) {
     this.redirect('/processes')
   } else {
+    Session.set('pro', id);
     this.render('process', {
       data: function () {
         return process;

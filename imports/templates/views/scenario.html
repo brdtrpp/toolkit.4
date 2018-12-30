@@ -1,6 +1,6 @@
 <template name="scenario">
-  <div class="card mb-3 border-success sce">
-     <div class="card-header text-white bg-success">{{sceName}}
+  <div class="card mb-3 border-success sceItem">
+     <div class="card-header text-white bg-success colSce">{{sceName}}
        <div class='pull-right'>$number
           <div class="btn-group pointer2">
             <button type="button" class="btn btn-oval btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -15,14 +15,16 @@
           </div>
         </div>
      </div>
-     <div class="card-body">
-        <h5 class="card-title">{{sceDescription}}</h5>
-        {{#each activityItem}}
-          {{> activity}}
-        {{/each}}
+     <div class="collapse" id={{sceIndex}}>
+       <div class="card-body">
+          <h5 class="card-title">{{sceDescription}}</h5>
+          {{#each activityItem}}
+            {{> activity}}
+          {{/each}}
+       </div>
      </div>
      <div class="card-footer">
-       <button type="button" class="btn btn-oval btn-info act" data-toggle="modal" data-target="#formModal">
+       <button type="button" class="btn btn-oval btn-info addAct" data-toggle="modal" data-target="#formModal">
          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Activity
        </button>
      </div>

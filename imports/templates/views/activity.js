@@ -10,8 +10,13 @@ Template.activity.onRendered = function() {
 
 // Adding events per template
 Template.activity.events({
-  'click .sub': function(){
-    Session.set('modalStatus', "sub");
+  'click .addSub': function(){
+    Session.set("sceIndex", 0);
+    Session.set('modalStatus', "addSub");
+  },
+
+  'click .act': function(){
+    console.log(this);
   }
 });
 
