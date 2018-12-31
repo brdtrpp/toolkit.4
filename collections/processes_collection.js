@@ -120,6 +120,7 @@ ProcessSchema = new SimpleSchema({
     type: String,
     label: "What is this name of scenario?"
   },
+
   "app.$.scenarios.$.sceDescription": {
     type: String,
     label: "A short description of the scenario.",
@@ -171,12 +172,21 @@ ProcessSchema = new SimpleSchema({
     type: Object
   },
 
-  "app.$.scenarios.$.activities.$.name": {
+  "app.$.scenarios.$.activities.$.actName": {
     type: String,
     label: "What is the name of this Activity?"
   },
 
-  "app.$.scenarios.$.activities.$.times": {
+  "app.$.scenarios.$.activities.$.actDescription": {
+    type: String,
+    label: "A short description of the scenario.",
+    max: 400,
+    autoform: {
+      rows: 3
+    }
+  },
+
+  "app.$.scenarios.$.activities.$.actTimes": {
     type: Number,
     // label: function(){
     //   if(Meteor.isClient && !this.isSet){
@@ -194,7 +204,7 @@ ProcessSchema = new SimpleSchema({
     // }
   },
 
-  "app.$.scenarios.$.activities.$.percent": {
+  "app.$.scenarios.$.activities.$.actPercent": {
     type: Number,
     label: "What % of the time does the occurance of this activity cause downtime?",
     min: 0,
@@ -228,6 +238,90 @@ ProcessSchema = new SimpleSchema({
   //       var rv = sumed * times;
   //       return rv;
   //     }
+  //   }
+  // },
+
+  "app.$.scenarios.$.activities.$.subactivity": {
+    type: Array,
+    label: "What activities are in this scenario?",
+    optional: true,
+    autoform: {
+      omit: true,
+    }
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$": {
+    type: Object
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.subName": {
+    type: String,
+    label: "What are the names of the subactivities that make up the parent activity?"
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.duration": {
+    type: Number,
+    label: "How Long Does it take?",
+    defaultValue: 0,
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.downtime": {
+    type: Boolean,
+    label: "Do the minutes contribute to Downtime?",
+    autoform: {
+      afFieldInput: {
+        type: "boolean-radios",
+      }
+    },
+    defaultValue: false,
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.rate": {
+    type: Number,
+    label: "Labor Rate $/hr",
+    defaultValue: 0,
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.people": {
+    type: Number,
+    label: "Number of People",
+    defaultValue: 0,
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.consumable": {
+    type: Number,
+    label: "Consumables Cost",
+    defaultValue: 0,
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.itemCost": {
+    type: Number,
+    label: "Cost of Items",
+    defaultValue: 0,
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.itemNum": {
+    type: Number,
+    label: "Number of Items",
+    defaultValue: 0,
+  },
+
+  // rollup: {
+  //   type: Number,
+  //   autoform: {
+  //     omit: true,
+  //   },
+  //   autoValue: function(){
+  //       let act = Activities.findOne({_id: this.field('activity').value});
+  //       let sce = Scenarios.findOne({_id: act.scenario});
+  //       let pdt = sce.process;
+  //       if (this.field('downtime').value === true) {
+  //         let ru = ( ( this.field('itemNum').value * this.field('itemCost').value ) + this.field('consumable').value + ( ( this.field('duration').value / 60 ) * ( this.field('rate').value * this.field('people').value ) ) + ( ( this.field('duration').value / 60 ) * pdt.downtime ) );
+  //         return ru;
+  //       } else {
+  //         let ru = (( this.field('itemNum').value * this.field('itemCost').value ) + this.field('consumable').value + ( ( this.field('duration').value / 60 ) * ( this.field('rate').value * this.field('people').value ) ) );
+  //         return ru;
+  //       }
   //   }
   // },
 

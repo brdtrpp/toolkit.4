@@ -20,6 +20,9 @@ import './views/processes.js';
 // Process
 import './views/process.html';
 import './views/process.js';
+// Scenario
+import './views/scenario.html';
+import './views/scenario.js';
 // Activities
 import './views/activity.html';
 import './views/activity.js';

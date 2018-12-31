@@ -1,0 +1,30 @@
+<template name="scenario">
+  <div class="card mb-3 border-success">
+     <div class="card-header text-white bg-success">{{sceName}}
+       <div class='pull-right'>$number
+          <div class="btn-group pointer2">
+            <button type="button" class="btn btn-oval btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-v pointer"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="pointer2"><span class="fas fa-redo-alt clone-scenario"></span> Clone Scenario</li>
+              <li class="pointer2"><span class="far fa-file template-scenario"></span> Templatize Scenario</li>
+              <li class="pointer2"><span class="fas fa-pencil-alt edit-scenario"></span> Edit Scenario</li>
+              <li class="pointer2"><span class="fas fa-trash delete-scenario"></span> Delete Scenario</li>
+            </ul>
+          </div>
+        </div>
+     </div>
+     <div class="card-body">
+        <h5 class="card-title">{{sceDescription}}</h5>
+        {{#each activityItem}}
+          {{> activity}}
+        {{/each}}
+     </div>
+     <div class="card-footer">
+       <button type="button" class="btn btn-oval btn-info act" data-toggle="modal" data-target="#formModal">
+         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Activity
+       </button>
+     </div>
+  </div>
+</template>

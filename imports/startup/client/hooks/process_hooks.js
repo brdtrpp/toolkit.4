@@ -1,7 +1,15 @@
 AutoForm.hooks({
   insertApp: {
+    before:{
+      "update-pushArray": function(doc){
+        Session.set('appId', doc.appName);
+        return doc;
+      }
+    },
     onSuccess: function(formType, result) {
       Bert.alert( 'Application was added!', 'success', 'growl-top-right' );
+      console.log(result);
+
       $('#formModal').modal('hide');
     },
      onError: function(formType, error) {
@@ -48,4 +56,20 @@ AutoForm.hooks({
     beginSubmit: function() {},
     endSubmit: function() {},
   },
+
+  insertAct:{
+    before:{
+      "update-pushArray": function(doc){
+        console.log(doc);
+        return doc;
+      }
+    },
+
+    after: {
+      "update-pushArray": function(error, result) {
+      }
+    },
+    beginSubmit: function() {},
+    endSubmit: function() {},
+  }
 });

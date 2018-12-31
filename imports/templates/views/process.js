@@ -11,7 +11,15 @@ Template.process.onRendered(function() {
 // Adding events per template
 Template.process.events({
   'click .app': function(){
-    Session.set('appId', this.appName);
+    var proId = Session.get('pro');
+    var app = Processes.findOne({_id: proId}).app;
+    var appName = this.appName;
+    var appIndex = app.indexOf(obj => obj.appname === "asdfasdfasdf");
+    console.log(app);
+    console.log(appObj);
+    console.log(appIndex);
+
+    Session.set('appId', appName);
     Session.set('modalStatus', "app");
   },
 
@@ -55,7 +63,7 @@ Template.process.helpers({
     }
   },
 
-  scenario(){
+  scenarioItem(){
     var appId = Session.get("appId");
     if (appId === undefined ){
       return []

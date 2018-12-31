@@ -1,6 +1,6 @@
 <template name="activity">
   <div class="card mb-3 border-info">
-     <div class="card-header text-white bg-info">NAME
+     <div class="card-header text-white bg-info">{{actName}}
        <div class='pull-right'>$number
           <div class="btn-group pinter2">
             <button type="button" class="btn btn-info header-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -16,7 +16,14 @@
         </div>
      </div>
      <div class="card-body">
-      {{>subactivity}}
+       {{#each subactivityItem}}
+        {{>subactivity}}
+       {{/each}}
+     </div>
+     <div class="card-footer">
+       <button type="button" class="btn btn-oval btn-warning sub" data-toggle="modal" data-target="#formModal">
+         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Subactivity
+       </button>
      </div>
   </div>
 </template>
