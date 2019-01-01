@@ -64,6 +64,33 @@ ProcessSchema = new SimpleSchema({
     }
   },
 
+    timeperiod: {
+      type: Object,
+      label: "What is the time period under review?",
+    },
+
+    'timeperiod.duration': Number,
+    "timeperiod.type": {
+      type: String,
+      autoform: {
+        options: {
+          hour: "Hours",
+          day: "Days",
+          week: "Weeks",
+          month: "Months",
+          year: "Years"
+        }
+      }
+    },
+
+    "timeperiod.time": Number,
+
+    downtime: {
+      type: Number,
+      label: "What is the downtime cost for this process? (in $/hr)",
+      min: 0
+    },
+
 
   // Application Schema
   app: {
@@ -80,22 +107,16 @@ ProcessSchema = new SimpleSchema({
     type: Object
   },
 
-  // "app.$.id":{
-  //   type: String,
-  //   autoValue: function(){
-  //     if (this.isInsert){
-  //       console.log(this);
-  //       const id = Random.id();
-  //       console.log(id);
-  //       return id;
-  //     } else {
-  //       this.unset();
-  //     }
-  //   },
-  //   autoform: {
-  //     omit: true,
-  //   },
-  // },
+  "app.$.appId":{
+    type: String,
+    autoValue: function(){
+      var key = Random.id(10);
+      return key;
+    },
+    autoform: {
+      omit: true,
+    },
+  },
 
   "app.$.appName": {
     type: String,
@@ -131,6 +152,17 @@ ProcessSchema = new SimpleSchema({
 
   "app.$.scenarios.$": {
     type: Object
+  },
+
+  "app.$.scenarios.$.sceId":{
+    type: String,
+    autoValue: function(){
+      var key = Random.id(10);
+      return key;
+    },
+    autoform: {
+      omit: true,
+    },
   },
 
   "app.$.scenarios.$.sceName": {
@@ -189,6 +221,17 @@ ProcessSchema = new SimpleSchema({
     type: Object
   },
 
+  "app.$.scenarios.$.activities.$.actId":{
+    type: String,
+    autoValue: function(){
+      var key = Random.id(10);
+      return key;
+    },
+    autoform: {
+      omit: true,
+    },
+  },
+
   "app.$.scenarios.$.activities.$.actName": {
     type: String,
     label: "What is the name of this Activity?"
@@ -229,34 +272,37 @@ ProcessSchema = new SimpleSchema({
     defaultValue: 0
   },
 
-  // rollup: {
-  //   type: Number,
-  //   autoform: {
-  //     omit: true,
-  //   },
-  //   autoValue: function(){
-  //     var sumArray = [];
-  //     var subs = Subactivities.find({activity: this.docId}).fetch();
-  //     _.forEach(subs, function(sub){
-  //       sumArray.push(sub.rollup);
-  //     });
-  //     function getSum(total, num){
-  //       return total + num;
-  //     }
-  //     if(!this.field('times').isSet){
-  //       var actTimes = Activities.findOne(this.docId).times;
-  //       var sumed = sumArray.reduce(getSum);
-  //       return sumed * actTimes;
-  //     } else if (sumArray == 0) {
-  //       return 0;
-  //     } else {
-  //       var sumed = sumArray.reduce(getSum);
-  //       var times = this.field('times').value;
-  //       var rv = sumed * times;
-  //       return rv;
-  //     }
-  //   }
-  // },
+  "app.$.scenarios.$.activities.$.actRollup": {
+    type: Number,
+    autoform: {
+      omit: true,
+    },
+    autoValue: function(){
+      // var subs = this;
+      console.log(this);
+      return 15;
+      // var sumArray = [];
+      // var subs = Subactivities.find({activity: this.docId}).fetch();
+      // _.forEach(subs, function(sub){
+      //   sumArray.push(sub.rollup);
+      // });
+      // function getSum(total, num){
+      //   return total + num;
+      // }
+      // if(!this.sublingField('actTimes').isSet){
+      //   var actTimes = Activities.findOne(this.docId).times;
+      //   var sumed = sumArray.reduce(getSum);
+      //   return sumed * actTimes;
+      // } else if (sumArray == 0) {
+      //   return 0;
+      // } else {
+      //   var sumed = sumArray.reduce(getSum);
+      //   var times = this.field('times').value;
+      //   var rv = sumed * times;
+      //   return rv;
+      // }
+    }
+  },
 
   "app.$.scenarios.$.activities.$.subactivity": {
     type: Array,
@@ -269,6 +315,17 @@ ProcessSchema = new SimpleSchema({
 
   "app.$.scenarios.$.activities.$.subactivity.$": {
     type: Object
+  },
+
+  "app.$.scenarios.$.activities.$.subactivity.$.subId":{
+    type: String,
+    autoValue: function(){
+      var key = Random.id(10);
+      return key;
+    },
+    autoform: {
+      omit: true,
+    },
   },
 
   "app.$.scenarios.$.activities.$.subactivity.$.subName": {
@@ -323,51 +380,31 @@ ProcessSchema = new SimpleSchema({
     defaultValue: 0,
   },
 
-  // rollup: {
-  //   type: Number,
-  //   autoform: {
-  //     omit: true,
-  //   },
-  //   autoValue: function(){
-  //       let act = Activities.findOne({_id: this.field('activity').value});
-  //       let sce = Scenarios.findOne({_id: act.scenario});
-  //       let pdt = sce.process;
-  //       if (this.field('downtime').value === true) {
-  //         let ru = ( ( this.field('itemNum').value * this.field('itemCost').value ) + this.field('consumable').value + ( ( this.field('duration').value / 60 ) * ( this.field('rate').value * this.field('people').value ) ) + ( ( this.field('duration').value / 60 ) * pdt.downtime ) );
-  //         return ru;
-  //       } else {
-  //         let ru = (( this.field('itemNum').value * this.field('itemCost').value ) + this.field('consumable').value + ( ( this.field('duration').value / 60 ) * ( this.field('rate').value * this.field('people').value ) ) );
-  //         return ru;
-  //       }
-  //   }
-  // },
-
-  timeperiod: {
-    type: Object,
-    label: "What is the time period under review?",
-  },
-
-  'timeperiod.duration': Number,
-  "timeperiod.type": {
-    type: String,
+  "app.$.scenarios.$.activities.$.subactivity.$.subRollup": {
+    type: Number,
     autoform: {
-      options: {
-        hour: "Hours",
-        day: "Days",
-        week: "Weeks",
-        month: "Months",
-        year: "Years"
+      omit: true,
+    },
+    autoValue: function(){
+      var pro = Processes.findOne({_id: this.docId});
+      var itemNum = this.siblingField('itemNum').value;
+      var itemCost = this.siblingField('itemCost').value;
+      var consumable = this.siblingField('consumable').value;
+      var duration = this.siblingField('duration').value;
+      var rate = this.siblingField('rate').value;
+      var people = this.siblingField('people').value;
+      var downtime = this.siblingField('downtime').value;
+      // console.log(pro);
+      if (downtime){
+        let subRollup = (( itemNum * itemCost ) + consumable + (( duration / 60 ) * ( rate * people )) + (( duration / 60 ) * pro.downtime ));
+        return subRollup;
+      } else {
+        let subRollup = (( itemNum * itemCost ) + consumable + (( duration / 60 ) * ( rate * people )));
+        return subRollup;
       }
+      console.log(pro);
     }
   },
-
-  "timeperiod.time": Number,
-
-  downtime: {
-    type: Number,
-    label: "What is the downtime cost for this process? (in $/hr)",
-    min: 0
-  }
 
 });
 

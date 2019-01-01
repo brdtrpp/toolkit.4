@@ -23,13 +23,13 @@ Template.scenario.events({
       Session.set("sceIndex", 0);
     } else {
       var sceIndex = sce.findIndex(obj => obj.sceName == this.sceName);
+      console.log(sceIndex);
       Session.set("sceIndex", sceIndex);
     }
   },
 
   'click .colSce': function(){
-    var sceIndex = Session.get("sceIndex");
-    $("#sce"+sceIndex).collapse('toggle');
+    $("#"+this.sceId).collapse('toggle');
   }
 });
 
@@ -37,8 +37,4 @@ Template.scenario.helpers({
   activityItem(){
     return this.activities;
   },
-  sceIndex(){
-    var sceIndex = Session.get("sceIndex");
-    return "sce"+sceIndex;
-  }
 });

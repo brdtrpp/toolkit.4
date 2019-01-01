@@ -17,49 +17,47 @@ Template.modal.helpers({
 
   formId(){
     var formId = Session.get("formId");
-    console.log(formId);
     return formId;
   },
 
   formType(){
     var formType = Session.get("formType");
-    console.log(formType);
     return formType;
   },
 
   formScope(){
     var formScope = Session.get("formScope");
-    console.log(formScope);
     return formScope;
   },
 
   modalTitle(){
     var modalTitle = Session.get("modalTitle");
-    console.log(modalTitle);
     return modalTitle;
   },
 
   proId(){
     var proId = Session.get('pro');
-    console.log(proId);
     return Processes.findOne({_id: proId});
   },
 
   processItem(){
     var proId = Session.get('pro');
-    if(!proId){
+    var formType = Session.get('formType');
+    if(proId == undefined){
+      console.log(formType);
       return false;
-    } else{
+    } else {
+      console.log(formType);
       return true;
     }
   },
 
   scoped(){
     var status = Session.get("modalStatus");
-    console.log(status);
+    // console.log(status);
     switch (status) {
       case "addApp":
-        console.log("addApp");
+        // console.log("addApp");
         Session.set({
           'formId': "insertApp",
           'modalTitle': "Add an Application",
@@ -69,7 +67,7 @@ Template.modal.helpers({
         break;
 
       case "addSce":
-        console.log("addSce");
+        // console.log("addSce");
         var appIndex = Session.get("appIndex");
         var scope = "app."+appIndex+".scenarios";
         Session.set({
@@ -81,7 +79,7 @@ Template.modal.helpers({
         break;
 
       case "addAct":
-        console.log("addAct");
+        // console.log("addAct");
         var appIndex = Session.get("appIndex");
         var sceIndex = Session.get("sceIndex");
         var scope = "app."+appIndex+".scenarios."+sceIndex+".activities";
@@ -94,25 +92,26 @@ Template.modal.helpers({
         break;
 
       case "addSub":
-        console.log("addSub");
+        // console.log("addSub");
         var appIndex = Session.get("appIndex");
         var sceIndex = Session.get("sceIndex");
-        var subIndex = Session.get("subIndex");
-        var scope =  "app."+appIndex+".scenarios."+sceIndex+".activities."+sceIndex+".subactivity";
+        var actIndex = Session.get("actIndex");
+        var scope =  "app."+appIndex+".scenarios."+sceIndex+".activities."+actIndex+".subactivity";
         Session.set({
           'formId': "insertSub",
           'modalTitle': "Add a Subactivity",
           'formType': "update-pushArray",
           'formScope': scope
         });
+        console.log(actIndex);
         break;
 
       default:
-        console.log("default");
+        // console.log("default");
         Session.set({
           'formId': "unknownForm",
           'modalTitle': "unknownForm",
-          'formType': "update",
+          'formType': "update-pushArray",
           'formScope': 'app'
         });
     }
