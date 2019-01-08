@@ -27,9 +27,10 @@ var hooksObject = {
     }
 
     var id = Session.get("pro");
-    // console.log(id);
-    // var process = Processes.update({_id: id}, { $set: { updatedAt: new Date() } });
-    // console.log(process);
+    var appIndex = Session.get("appIndex");
+    var sceIndex = Session.get("sceIndex");
+    var actIndex = Session.get("actIndex");
+    Meteor.call('rollup', id, appIndex, sceIndex, actIndex);
 
     Bert.alert( item+' was added!', 'success', 'growl-top-right' );
     $('#formModal').modal('hide');

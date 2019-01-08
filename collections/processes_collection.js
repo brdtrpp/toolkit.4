@@ -277,10 +277,10 @@ ProcessSchema = new SimpleSchema({
     autoform: {
       omit: true,
     },
-    autoValue: function(){
+    // autoValue: function(){
       // var subs = this;
-      console.log(this);
-      return 15;
+      // console.log(this);
+      // return 15;
       // var sumArray = [];
       // var subs = Subactivities.find({activity: this.docId}).fetch();
       // _.forEach(subs, function(sub){
@@ -301,7 +301,7 @@ ProcessSchema = new SimpleSchema({
       //   var rv = sumed * times;
       //   return rv;
       // }
-    }
+    // }
   },
 
   "app.$.scenarios.$.activities.$.subactivity": {
@@ -394,15 +394,18 @@ ProcessSchema = new SimpleSchema({
       var rate = this.siblingField('rate').value;
       var people = this.siblingField('people').value;
       var downtime = this.siblingField('downtime').value;
-      // console.log(pro);
+
+      function round(value, decimals) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      }
+
       if (downtime){
         let subRollup = (( itemNum * itemCost ) + consumable + (( duration / 60 ) * ( rate * people )) + (( duration / 60 ) * pro.downtime ));
-        return subRollup;
+        return round(subRollup, 2);
       } else {
         let subRollup = (( itemNum * itemCost ) + consumable + (( duration / 60 ) * ( rate * people )));
-        return subRollup;
+        return round(subRollup, 2);
       }
-      console.log(pro);
     }
   },
 

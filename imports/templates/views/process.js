@@ -11,7 +11,6 @@ Template.process.onRendered(function() {
 // Adding events per template
 Template.process.events({
   'click .addApp': function(){
-    console.log("addApp");
     Session.set('modalStatus', "addApp");
   },
 
@@ -27,7 +26,11 @@ Template.process.events({
     }
 
     var appName = this.appName;
-    Session.set('appId', appName);
+    if( Session.equals('appId', appName) ) {
+    } else {
+      Session.set('appId', appName);
+    }
+
   },
 
   'click .addSce': function(){
