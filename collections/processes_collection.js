@@ -277,31 +277,21 @@ ProcessSchema = new SimpleSchema({
     autoform: {
       omit: true,
     },
-    // autoValue: function(){
-      // var subs = this;
-      // console.log(this);
-      // return 15;
-      // var sumArray = [];
-      // var subs = Subactivities.find({activity: this.docId}).fetch();
-      // _.forEach(subs, function(sub){
-      //   sumArray.push(sub.rollup);
-      // });
-      // function getSum(total, num){
-      //   return total + num;
-      // }
-      // if(!this.sublingField('actTimes').isSet){
-      //   var actTimes = Activities.findOne(this.docId).times;
-      //   var sumed = sumArray.reduce(getSum);
-      //   return sumed * actTimes;
-      // } else if (sumArray == 0) {
-      //   return 0;
-      // } else {
-      //   var sumed = sumArray.reduce(getSum);
-      //   var times = this.field('times').value;
-      //   var rv = sumed * times;
-      //   return rv;
-      // }
-    // }
+    autoValue: function(){
+      const subs = this.siblingField("subactivity").value;
+      var subSum = [];
+      _.map(subs, function(sub){
+        subSum.push(sub.subRollup);
+      });
+
+      function getSum(total, num) {
+        return total + num;
+      }
+
+      var actRollup = subSum.reduce(getSum);
+      console.log(actRollup);
+      return actRollup;
+    }
   },
 
   "app.$.scenarios.$.activities.$.subactivity": {
