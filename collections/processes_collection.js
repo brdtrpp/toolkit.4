@@ -298,8 +298,9 @@ ProcessSchema = new SimpleSchema({
         return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
       }
 
-      if( actRollup == 0 ){
-        return 0
+
+      if( subSum.length == 0 ){
+        return 0;
       } else {
         var actRollup = subSum.reduce(getSum);
         return round(actRollup, 2);
