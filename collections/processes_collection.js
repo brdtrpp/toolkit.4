@@ -186,27 +186,33 @@ ProcessSchema = new SimpleSchema({
   },
 
   //  Scenario Rollup
-  // rollup: {
-  //   type: Number,
-  //   autoform: {
-  //     omit: true,
-  //   },
-  //   autoValue: function(){
-  //     var sumArray = [];
-  //     var sces = Activities.find({scenario: this.docId}).fetch();
-  //     _.forEach(sces, function(sce){
-  //       sumArray.push(sce.rollup);
-  //     });
-  //     function getSum(total, num){
-  //       return total + num;
-  //     }
-  //     if (sumArray == 0) {
-  //       return 0;
-  //     } else {
-  //       return sumArray.reduce(getSum);
-  //     }
-  //   }
-  // },
+  "app.$.scenarios.$.sceRollup": {
+    type: Number,
+    autoform: {
+      omit: true,
+    },
+    autoValue: function(){
+      var sumArray = [];
+      var sces = this.siblingField("activities").value;
+      _.forEach(sces, function(sce){
+        sumArray.push(sce.actRollup);
+      });
+      function getSum(total, num){
+        return total + num;
+      }
+
+      function round(value, decimals) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      }
+
+      if (sumArray == 0) {
+        return 0;
+      } else {
+        var sumReturn = sumArray.reduce(getSum);
+        return round(sumReturn, 2);
+      }
+    }
+  },
 
   "app.$.scenarios.$.activities": {
     type: Array,
@@ -288,9 +294,17 @@ ProcessSchema = new SimpleSchema({
         return total + num;
       }
 
-      var actRollup = subSum.reduce(getSum);
-      console.log(actRollup);
-      return actRollup;
+      function round(value, decimals) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      }
+
+      if( actRollup == 0 ){
+        return 0
+      } else {
+        var actRollup = subSum.reduce(getSum);
+        return round(actRollup, 2);
+      }
+
     }
   },
 
